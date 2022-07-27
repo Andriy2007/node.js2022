@@ -12,7 +12,7 @@ app.use('*', (req, res) => {
     res.status(404).json('page not found');
 })
 app.listen(5000, () => {
-    console.log("Hi");
+    console.log("Hii");
 })
 
 
