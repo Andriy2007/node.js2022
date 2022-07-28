@@ -1,10 +1,13 @@
-const { userService } = require('../services');
+const { userService, passwordService } = require('../services');
+const {userPresenter} = require("../presenters/user.presenter");
 
 module.exports = {
     findUsers: async (req, res, next) => {
         try {
-            const users = await userService.findUsers();
-            res.json(users);
+            const users = await userService.findUsers(req.query).exec();
+            const usersForResponse = users.map(u => userPresenter(u));
+
+            res.json(usersForResponse);
         } catch (e) {
             next(e);
         }
@@ -12,8 +15,11 @@ module.exports = {
 
     createUser: async (req, res, next) => {
         try {
-            const newUser = await userService.createUser(req.body);
-            res.status(201).json(newUser);
+            const hash = await passwordService.hashPassword(req.body.password);
+            const newUser = await userService.createUser({...req.body, password: hash});
+            const userForResponse = userPresenter(newUser);
+
+            res.status(201).json(userForResponse);
         } catch (e) {
             next(e);
         }
@@ -21,8 +27,10 @@ module.exports = {
 
     getUserById: async (req, res, next) => {
         try {
-            const { user } = req;
-            res.json(user);
+            const {user} = req;
+            const userForResponse = userPresenter(user);
+
+            res.json(userForResponse);
         } catch (e) {
             next(e);
         }
@@ -30,9 +38,11 @@ module.exports = {
 
     updateUserById: async (req, res, next) => {
         try {
-            const { id } = req.params;
-            const updatedUser = await userService.updateOneUser({ _id: id }, req.dateForUpdate);
-            res.status(201).json(updatedUser);
+            const {id} = req.params;
+            const updatedUser = await userService.updateOneUser({_id: id}, req.body);
+            const userForResponse = userPresenter(updatedUser);
+
+            res.status(201).json(userForResponse);
         } catch (e) {
             next(e);
         }
