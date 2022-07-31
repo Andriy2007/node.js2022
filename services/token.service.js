@@ -13,11 +13,11 @@ function generateAuthTokens(payload = {}) {
     }
 }
 
-function checkToken(token = '', tokenType = tokenTypeEnum.ACCESS) {
+  function checkToken(token = '', tokenType = tokenTypeEnum.ACCESS) {
     try {
         let secret;
-        if(tokenType === tokenTypeEnum.ACCESS) secret = configs.ACCESS_TOKEN_SECRET;
-        if(tokenType === tokenTypeEnum.REFRESH) secret = configs.REFRESH_TOKEN_SECRET;
+        if (tokenType === tokenTypeEnum.ACCESS) secret = configs.ACCESS_TOKEN_SECRET;
+        if (tokenType === tokenTypeEnum.REFRESH) secret = configs.REFRESH_TOKEN_SECRET;
 
         return jwt.verify(token, secret);
     } catch (e) {
@@ -25,7 +25,7 @@ function checkToken(token = '', tokenType = tokenTypeEnum.ACCESS) {
     }
 }
 
-module.exports = {
-    checkToken,
+ module.exports = {
+     checkToken,
     generateAuthTokens
 }

@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const path = require('path');
+require('dotenv').config({ path: path.join(process.cwd(), 'environments', `${process.env.MODE}.env`)})
+
 const { authRouter, userRouter } = require('./routes');
 const {configs} = require("./configs");
 
@@ -28,6 +31,7 @@ app.use((err, req, res, next) => {
 app.listen(configs.PORT, () => {
     console.log(`Started on port ${configs.PORT}`);
 });
+
 
 
 
