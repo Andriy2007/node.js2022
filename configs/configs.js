@@ -10,7 +10,7 @@ module.exports = {
 
     FRONTEND_URL: process.env.FRONTEND_URL || 'https://google.com',
 
-    TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID || 'AC6930ccf3cf8a5cda39f70216c4e17166',
-    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN || '55415db8d5120d0175edd8e6737ea935',
-    TWILIO_NUMBER: process.env.TWILIO_NUMBER || '+18454079532',
+    TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID || 'AC6930',
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN || '55415',
+    TWILIO_NUMBER: process.env.TWILIO_NUMBER || '+1845',
 };
